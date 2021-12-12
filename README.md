@@ -57,7 +57,7 @@ The configuration details of each machine may be found below.
 
 ### Access Policies
 
-The machines on the internal network are not exposed to the public Internet. 
+The machines on the internal network are not exposed to the public Internet. A peering relationship has been established between the Red Team Virtual Network and the ELK Virtual Network to facilitate communication.
 
 Only the __Jump-Box-Provisioner__ machine can accept connections from the Internet. Access to this machine is only allowed from the following IP addresses:
 
@@ -65,10 +65,10 @@ Only the __Jump-Box-Provisioner__ machine can accept connections from the Intern
 
 Machines within the network can only be accessed by __Workstation and Jump-Box-Provisioner through SSH JumpBox__.
 - Which machine did you allow to access your ELK VM?
-  - *Jump-Box-Provisioner IP : 10.0.0.4 via SSH port 22*
+  - *Jump-Box-Provisioner is allowed to access the ELK VM.*
 
 - What was its IP address?
-  - *Workstation MY Public IP via port TCP 5601*
+  - *The Jump-Box-Provisioner IP is at 10.0.0.4(Private IP) and 20.124.251.206(Public IP) and it can be accessed via SSH port 22. The ELK VM could be accessed by Workstation MY Public IP via port TCP 5601.*
 
 
 A summary of the access policies in place can be found in the table below.
@@ -81,21 +81,24 @@ A summary of the access policies in place can be found in the table below.
 | Web-3      | No                  | 10.1.0.4 on SSH 22                       |
 | ELK Server | No                  | Workstation MY Public IP using TCP 5601  |
 
+All the VM's can be accessed only from the Jump-Box-Provisioner. 
+
 ### Elk Configuration
 
-Ansible was used to automate configuration of the ELK machine. No configuration was performed manually, which is advantageous because...
-- What is the main advantage of automating configuration with Ansible?
-  - **There are multiple advantages, Ansible lets you quickly and easily deploy multitier applications through a YAML playbook.**
-  - **You don't need to write custom code to automate your systems.**
-  - **Ansible will also figure out how to get your systems to the state you want them to be in.**
+Ansible was used to automate configuration of the ELK machine. No configuration was performed manually, it is advantageous to automating configuration with Ansible because of the below mentioned reasons:
+  - **Ansible allows for quick and easy deployment of multitier applications through a YAML playbook.**
+  - **The automation language used is very human-friendly-easily readable and writable.**
+  - **It is very helpful to automate the inventory of the implementation platform and centralized automation exceution.**
+  - **Helps to cutdown deployment and processing time of various processes.**
 
 The playbook implements the following tasks:
-- Configure ELK VM 
-   `  - name: Config elk VM with Docker
+- Configure ELK VM with Docker
+   ``  
+  - name: Config elk VM with Docker
     hosts: elk
     become: true
     tasks:
-    `
+    ``
 - ...
 - ...
 
