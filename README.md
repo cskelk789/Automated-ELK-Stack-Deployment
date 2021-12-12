@@ -51,11 +51,11 @@ _Note: Use the [Markdown Table Generator](http://www.tablesgenerator.com/markdow
 
 | Name       | Function      | IP Address | Operating System |
 | ---------- | ------------- | ---------- | ---------------- |
-| Jump Box   | Gateway       | 10.0.0.1   | Linux            |
-| Web-1      | Ubuntu Server |            | Linux            |
-| Web-2      | Ubuntu Server |            | Linux            |
-| Web-3      | Ubuntu Server |            | Linux            |
-| ELK Server | Ubuntu Server |            | Linux            |
+| Jump Box   | Gateway       | 10.0.0.4   | Linux            |
+| Web-1      | Ubuntu Server | 10.0.0.5   | Linux            |
+| Web-2      | Ubuntu Server | 10.0.0.7   | Linux            |
+| Web-3      | Ubuntu Server | 10.0.0.8   | Linux            |
+| ELK Server | Ubuntu Server | 10.1.0.4   | Linux            |
 
 ### Access Policies
 
@@ -63,25 +63,25 @@ The machines on the internal network are not exposed to the public Internet.
 
 Only the __Jump-Box-Provisioner__ machine can accept connections from the Internet. Access to this machine is only allowed from the following IP addresses:
 
-- **_Workstation MY Public IP through TCP 5601_**
+- **Workstation MY Public IP through TCP 5601**
 
 Machines within the network can only be accessed by __Workstation and Jump-Box-Provisioner through SSH JumpBox__.
 - _Which machine did you allow to access your ELK VM? _
-  - ***Jump-Box-Provisioner IP : 10.1.0.4 via SSH port 22\***
+  - **Jump-Box-Provisioner IP : 10.0.0.4 via SSH port 22\**
 
 - _What was its IP address?_
-  - ***Workstation MY Public IP via port TCP 5601\***
+  - **Workstation MY Public IP via port TCP 5601\**
 
 
 A summary of the access policies in place can be found in the table below.
 
-| Name       | Publicly Accessible | Allowed IP Addresses |
-| ---------- | ------------------- | -------------------- |
-| Jump Box   | Yes                 | 10.0.0.1 10.0.0.2    |
-| Web-1      | No                  |                      |
-| Web-2      | No                  |                      |
-| Web-3      | No                  |                      |
-| ELK Server | No                  |                      |
+| Name       | Publicly Accessible | Allowed IP Addresses                     |
+| ---------- | ------------------- | --------------------                     |
+| Jump Box   | Yes                 | 20.124.251.206 (Workstation IP on SSH 22)|
+| Web-1      | No                  | 10.1.0.4 on SSH 22                       |
+| Web-2      | No                  | 10.1.0.4 on SSH 22                       |
+| Web-3      | No                  | 10.1.0.4 on SSH 22                       |
+| ELK Server | No                  | Workstation MY Public IP using TCP 5601  |
 
 ### Elk Configuration
 
