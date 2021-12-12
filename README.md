@@ -6,7 +6,14 @@ The files in this repository were used to configure the network depicted below.
 
 These files have been tested and used to generate a live ELK deployment on Azure. They can be used to either recreate the entire deployment pictured above. Alternatively, select portions of the **yml and config** file may be used to install only certain pieces of it, such as Filebeat.
 
-..1.[DVWA Web VM/Docker Configuration](https://github.com/cskelk789/ELK-Stack-Deployment/blob/main/Ansible/DVWA/pentest.yml)
+..* [DVWA Web VM/Docker Configuration] (https://github.com/cskelk789/ELK-Stack-Deployment/blob/main/Ansible/DVWA/pentest.yml)
+..* [Hosts File] (https://github.com/cskelk789/ELK-Stack-Deployment/blob/main/Ansible/hosts)
+..* [Ansible Configuration] (https://github.com/cskelk789/ELK-Stack-Deployment/blob/main/Ansible/ansible.cfg)
+..* [ELK Installation and Configuration] (https://github.com/cskelk789/ELK-Stack-Deployment/blob/main/Ansible/ELK/install-elk.yml)
+..* [Filebeat Configuration] (https://github.com/cskelk789/ELK-Stack-Deployment/blob/main/Ansible/Filebeat/filebeat-config.yml)
+..* [Filebeat Playbook] (https://github.com/cskelk789/ELK-Stack-Deployment/blob/main/Ansible/Filebeat/filebeat-playbook.yml)
+..* [Metricbeat Configuration] (https://github.com/cskelk789/ELK-Stack-Deployment/blob/main/Ansible/Metricbeat/metricbeat-config.yml)
+..* [Metricbeat Playbook] (https://github.com/cskelk789/ELK-Stack-Deployment/blob/main/Ansible/Metricbeat/metricbeat-playbook.yml)
 
 This document contains the following details:
 - Description of the Topology
