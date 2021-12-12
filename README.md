@@ -91,16 +91,73 @@ Ansible was used to automate configuration of the ELK machine. No configuration 
   - **It is very helpful to automate the inventory of the implementation platform and centralized automation exceution.**
   - **Helps to cutdown deployment and processing time of various processes.**
 
-The playbook implements the following tasks:
+The ELK Installation playbook implements the following tasks:
 - Configure ELK VM with Docker
-   ``  
-  - name: Config elk VM with Docker
-    hosts: elk
-    become: true
-    tasks:
-    ``
-- ...
-- ...
+   ``` 
+   - name: Config elk VM with Docker
+     hosts: elk
+     become: true
+     tasks:
+    ```
+- Install Docker.io
+  ```
+  - name: docker.io
+    apt:
+      force_apt_get: yes
+      update_cache: yes
+      name: docker.io
+      state: present
+  ```
+- Install Python-pip
+  ```
+  - name: Install python3-pip
+    apt:
+      force_apt_get: yes
+      name: python3-pip
+      state: present
+  ```
+- Install Docker Module
+  ```
+  - name: Install Docker Module
+    pip:
+      name: docker
+      state: present
+  ```
+- Increase Virtual Memory
+  ```
+  - name: Increase virtual memory
+    command: sysctl -w vm.max_map_count=262144
+  ```
+- Use more memory
+  ```
+  - name: Use more memory
+    sysctl:
+      name: vm.max_map_count
+      value: "262144"
+      state: present
+      reload: yes
+  ```
+- Download and Launch ELK Docker Container (image sebp/elk) Published Ports 5044, 5601 and 9200
+  ```
+  - name: download and launch a docker elk container
+    docker_container:
+      name: elk
+      image: sebp/elk:761
+      state: started
+      restart_policy: always
+      published_ports:
+        - 5601:5601
+        - 9200:9200
+        - 5044:5044
+  ```
+- Enable the Docker Service
+  ```
+  - name: Enable docker service
+    systemd:
+      name: docker
+      enabled: yes
+  ```
+
 
 The following screenshot displays the result of running `docker ps` after successfully configuring the ELK instance.
 
