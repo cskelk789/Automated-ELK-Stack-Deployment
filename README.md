@@ -31,7 +31,7 @@ The main purpose of this network is to expose a load-balanced and monitored inst
 Load balancing ensures that the application will be highly **functional and available**, in addition to restricting **traffic** to the network.
 - What aspect of security do load balancers protect? 
 
-  ***Load balancers add resiliency by rerouting live traffic from one server to another if a server falls prey to a DDoS attack or otherwise becomes unavailable.\***
+  **Load balancers add resiliency by rerouting live traffic from one server to another if a server falls prey to a DDoS attack or otherwise becomes unavailable.\**
 
 - What is the advantage of a jump box?
 
