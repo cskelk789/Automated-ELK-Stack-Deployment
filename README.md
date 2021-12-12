@@ -35,20 +35,18 @@ Load balancing ensures that the application will be highly **functional and avai
 
 - What is the advantage of a jump box?
 
-  **A Jump Box Provisioner is a good addition to a corporate network as it prevents internal VMs from being exposed via a public IP Address. This allows us to do monitoring and logging on a single box. We can also restrict the IP addresses able to communicate with the Jump Box, as we've done here.**
+  **A Jump Box Provisioner is a good addition to a corporate network as it prevents internal VMs from being exposed via a public IP Address. This allows monitoring and logging on a single box. By implementing Security Rules, we can also restrict the IP addresses able to communicate with the Jump Box.**
 
 Integrating an ELK server allows users to easily monitor the vulnerable VMs for changes to the **network** and system **logs**.
 - What does Filebeat watch for?
 
-  **Filebeat monitors the log files or locations that you specify, collects log events, and forwards them either to Elasticsearch or Logstash for indexing.**
+  **Filebeat is a light weight log shipper which is installed as an agent on your servers and monitors the log files or locations that you specify, collects log events, and forwards them either to Elasticsearch or log stash for indexing.**
 
 - What does Metricbeat record?
 
-  **Metricbeat takes the metrics and statistics that it collects and ships them to the output that you specify, such as Elasticsearch or Logstash.**
+  **Metricbeat is a lightweight agent that can be installed on target servers to periodically collect metric data from your target servers, this could be operating system metrics such as CPU or memory or data related to services running on the server. It can also be used to monitor other beats and ELK stack itself.**
 
 The configuration details of each machine may be found below.
-_Note: Use the [Markdown Table Generator](http://www.tablesgenerator.com/markdown_tables) to add/remove values from the table_.
-
 | Name       | Function      | IP Address | Operating System |
 | ---------- | ------------- | ---------- | ---------------- |
 | Jump Box   | Gateway       | 10.0.0.4   | Linux            |
@@ -66,11 +64,11 @@ Only the __Jump-Box-Provisioner__ machine can accept connections from the Intern
 - **Workstation MY Public IP through TCP 5601**
 
 Machines within the network can only be accessed by __Workstation and Jump-Box-Provisioner through SSH JumpBox__.
-- _Which machine did you allow to access your ELK VM? _
-  - **Jump-Box-Provisioner IP : 10.0.0.4 via SSH port 22\**
+- Which machine did you allow to access your ELK VM?
+  - *Jump-Box-Provisioner IP : 10.0.0.4 via SSH port 22*
 
-- _What was its IP address?_
-  - **Workstation MY Public IP via port TCP 5601\**
+- What was its IP address?
+  - *Workstation MY Public IP via port TCP 5601*
 
 
 A summary of the access policies in place can be found in the table below.
@@ -86,13 +84,18 @@ A summary of the access policies in place can be found in the table below.
 ### Elk Configuration
 
 Ansible was used to automate configuration of the ELK machine. No configuration was performed manually, which is advantageous because...
-- _What is the main advantage of automating configuration with Ansible?_
-  - ***There are multiple advantages, Ansible lets you quickly and easily deploy multitier applications through a YAML playbook.\***
-  - ***You don't need to write custom code to automate your systems.\***
-  - ***Ansible will also figure out how to get your systems to the state you want them to be in.\***
+- What is the main advantage of automating configuration with Ansible?
+  - **There are multiple advantages, Ansible lets you quickly and easily deploy multitier applications through a YAML playbook.**
+  - **You don't need to write custom code to automate your systems.**
+  - **Ansible will also figure out how to get your systems to the state you want them to be in.**
 
 The playbook implements the following tasks:
-- _TODO: In 3-5 bullets, explain the steps of the ELK installation play. E.g., install Docker; download image; etc._
+- Configure ELK VM 
+   `  - name: Config elk VM with Docker
+    hosts: elk
+    become: true
+    tasks:
+    `
 - ...
 - ...
 
