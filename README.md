@@ -208,12 +208,11 @@ SSH into the control node and follow the steps below:
   username: "elastic"
   password: "changeme" # TODO: Change this to the password you set
 
-# Starting with Beats version 6.0.0, the dashboards are loaded via the Kibana API.
-# This requires a Kibana endpoint configuration.
-setup.kibana:
+  # Starting with Beats version 6.0.0, the dashboards are loaded via the Kibana API.
+  # This requires a Kibana endpoint configuration.
+  setup.kibana:
   host: "10.1.0.4:5601" 
-# TODO: Change this to the IP address of your ELK server
-```
+  ```
 
    -Run the playbook using this command - `ansible-playbook filebeat-playbook.yml` 
     and navigate to Kibana > Logs : Add log data > System logs (DEB) > 5:Module Status > 
@@ -224,22 +223,20 @@ setup.kibana:
 - Configuring and Running the Metricbeat Playbook:
    -Copy the metricbeat-config.yml file to /etc/ansible/files.
    -Update the metricbeat-config.yml file to include the ELK private IP in lines 62 and 96 as shown below:
+   
    ```
    #============================== Kibana =====================================
-
   # Starting with Beats version 6.0.0, the dashboards are loaded via the Kibana API.
   # This requires a Kibana endpoint configuration.
   setup.kibana:
   host: "10.1.0.4:5601"
-  
   #-------------------------- Elasticsearch output ------------------------------
   output.elasticsearch:
-  # TODO: Change the hosts IP address to the IP address of your ELK server
-  # TODO: Change password from `changem` to the password you created
   hosts: ["10.1.0.4:9200"]
   username: "elastic"
   password: "changeme"
   ```
+   
    -Run the playbook using this command ansible-playbook metricbeat-playbook.yml 
     and navigate to Kibana > Logs : Add Metric data > Docker Metrics (DEB) > 5:Module Status > Check data_on Kibana to check that the installation worked as expected.
    
@@ -257,8 +254,8 @@ Answer the following questions to fill in the blanks:
   How do I specify which machine to install the ELK server on versus which to install Filebeat on?
   * /etc/ansible/hosts file (IP of the Virtual Machines).
   * Two separate groups have been specified in the etc/ansible/hosts file:
-    Group 1-webservers which has the IPs of the 3 VMs, Filebeat will be installed on these 3 VM's. 
-    Group 2-ELKserver which will have the IP of the VM ELK is installed on.
+    * Group 1-webservers which has the IPs of the 3 VMs, Filebeat will be installed on these 3 VM's. 
+    * Group 2-ELKserver which will have the IP of the VM ELK is installed on.
 
 - Which URL do you navigate to in order to check that the ELK server is running?
   * http://20.84.136.248:5601//app/kibana
