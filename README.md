@@ -16,12 +16,12 @@ These files have been tested and used to generate a live ELK deployment on Azure
 * [Metricbeat Playbook](https://github.com/cskelk789/ELK-Stack-Deployment/blob/main/Ansible/Metricbeat/metricbeat-playbook.yml)
 
 This document contains the following details:
-- Description of the Topology
-- Access Policies
-- ELK Configuration
-  - Beats in Use
-  - Machines Being Monitored
-- How to Use the Ansible Build
+- [Description of the Topology](https://github.com/cskelk789/Automated-ELK-Stack-Deployment#description-of-the-topology)
+- [Access Policies](https://github.com/cskelk789/Automated-ELK-Stack-Deployment#access-policies)
+- [ELK Configuration](https://github.com/cskelk789/Automated-ELK-Stack-Deployment#elk-configuration)
+ - [Machines Being Monitored]()
+ - [Beats in Use]()
+- [How to Use the Ansible Build]()
 
 
 ### Description of the Topology
@@ -163,12 +163,13 @@ The following screenshot displays the result of running `docker container list -
 
 [ELK VM Docker Container List](https://github.com/cskelk789/ELK-Stack-Deployment/blob/main/Ansible/ansible.cfg)
 
-### Target Machines & Beats
+### Machines being Monitored
 This ELK server is configured to monitor the following machines:
   - Web-1: 10.1.0.5
   - Web-2: 10.1.0.7
   - Web-3: 10.1.0.8
 
+### Beats in Use
 We have installed the following Beats on these machines:
 - Filebeat - 
 [View status of Filebeat Module]()
@@ -179,7 +180,7 @@ These Beats allow us to collect the following information from each machine:
 - Filebeat is used to collect log files from very specific files from remote machines. For example logs from Apache, Microsft Azure tools, web servers and MySQL databases.
 - Metericbeat is used to monitor VM stats, per CPU core stats, per filesystem stats, memory stats and network stats.
 
-### Using the Playbook
+### How to use the Ansible Build?
 In order to use the playbook, you will need to have an Ansible control node already configured. Assuming you have such a control node provisioned: 
 
 SSH into the control node and follow the steps below:
