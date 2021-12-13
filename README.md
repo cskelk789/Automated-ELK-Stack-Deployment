@@ -19,9 +19,9 @@ This document contains the following details:
 - [Description of the Topology](https://github.com/cskelk789/Automated-ELK-Stack-Deployment#description-of-the-topology)
 - [Access Policies](https://github.com/cskelk789/Automated-ELK-Stack-Deployment#access-policies)
 - [ELK Configuration](https://github.com/cskelk789/Automated-ELK-Stack-Deployment#elk-configuration)
- - [Machines Being Monitored]()
- - [Beats in Use]()
-- [How to Use the Ansible Build]()
+ - [Machines Being Monitored](https://github.com/cskelk789/Automated-ELK-Stack-Deployment#machines-being-monitored)
+ - [Beats in Use](https://github.com/cskelk789/Automated-ELK-Stack-Deployment#beats-in-use)
+- [How to Use the Ansible Build](https://github.com/cskelk789/Automated-ELK-Stack-Deployment#how-to-use-the-ansible-build)
 
 
 ### Description of the Topology
@@ -263,7 +263,13 @@ Answer the following questions to fill in the blanks:
 
 As a **Bonus**, provide the specific commands the user will need to run to download the playbook, update the files, etc.
   * The specific commands the user will need to run in order to download the playbook and configuration files, update the files, etc:
-    | Command                          | Purpose                          | 
-    | -------------------------------- |:--------------------------------:|
-    | ssh-keygen                       | create a ssh key for setup VM's  |
-  
+    | Command                                                        | Purpose                                                     | 
+    | -------------------------------------------------------------- |:-----------------------------------------------------------:|
+    | ssh-keygen                                                     |create a ssh key for setup VM's                             |
+    |sudo cat .ssh/id_rsa.pub	                                       |to view the ssh public key                                  |
+    |ssh azadmin@Jump-Box-Provisioner IP address	                    |to log into the Jump-Box-Provisioner                         |
+    |sudo docker container list -a	                                  |list all docker containers                                   |
+    |sudo docker start dremy_elbakyan	                               |start docker container dremy_elbakyan                        |
+    |sudo docker ps -a	                                              |list all active/inactive containers                          |
+    |sudo docker attach dremy_elbakyan	                              |effectively sshing into the dremy_elbakyan container         |
+    |cd /etc/ansible	                                                |Change directory to the Ansible directory                    |
