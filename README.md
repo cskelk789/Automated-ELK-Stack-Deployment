@@ -156,7 +156,22 @@ The ELK Installation playbook implements the following tasks:
   ```
 
 
-The following screenshot displays the result of running `docker container list -a` after successfully configuring the ELK instance.
+The following screenshot displays the result of running `docker container list -a` or `docker ps` after successfully configuring the ELK instance.
+
+### ELK Server
+![ELK Server](https://github.com/cskelk789/Automated-ELK-Stack-Deployment/blob/main/Images/Docker%20Status/docker_ps_output_ELKserver.png)
+
+### Jump-Box-Provisioner
+![Jump-Box-Provisioner](https://github.com/cskelk789/Automated-ELK-Stack-Deployment/blob/main/Images/Docker%20Status/JumpboxProv_PS.png)
+
+### Web-1
+![Web-1](https://github.com/cskelk789/Automated-ELK-Stack-Deployment/blob/main/Images/Docker%20Status/Web-1%20PS.png)
+
+### Web-2
+![Web-2](https://github.com/cskelk789/Automated-ELK-Stack-Deployment/blob/main/Images/Docker%20Status/Web-2%20PS.png)
+
+### Web-3
+![Web-3](https://github.com/cskelk789/Automated-ELK-Stack-Deployment/blob/main/Images/Docker%20Status/Web-3%20PS.png)
 
 [ELK VM Docker Container List](https://github.com/cskelk789/ELK-Stack-Deployment/blob/main/Ansible/ansible.cfg)
 
@@ -169,9 +184,9 @@ This ELK server is configured to monitor the following machines:
 ### Beats in Use
 We have installed the following Beats on these machines:
 - Filebeat - 
-[View status of Filebeat Module]()
+[View status of Filebeat Module](https://github.com/cskelk789/Automated-ELK-Stack-Deployment/blob/main/Images/Kibana%20Beats%20Related/Filebeat_module_Status.png)
 - Metricbeat
-[View status of Metricbeat Module]()
+[View status of Metricbeat Module](https://github.com/cskelk789/Automated-ELK-Stack-Deployment/blob/main/Images/Kibana%20Beats%20Related/Metricbeat_module_Status.png)
 
 These Beats allow us to collect the following information from each machine:
 - Filebeat is used to collect log files from very specific files from remote machines. For example logs from Apache, Microsft Azure tools, web servers and MySQL databases.
@@ -216,7 +231,7 @@ SSH into the control node and follow the steps below:
     and navigate to Kibana > Logs : Add log data > System logs (DEB) > 5:Module Status > 
     Check Incoming data on Kibana to check that the installation worked as expected.
   
-    [Filebeat Module Kibana Dashboard]()
+    [Filebeat Module Kibana Dashboard](https://github.com/cskelk789/Automated-ELK-Stack-Deployment/blob/main/Images/Kibana%20Beats%20Related/Filebeat%20Syslogs%20Dashboard.png)
    
 - Configuring and Running the Metricbeat Playbook:
    -Copy the metricbeat-config.yml file to /etc/ansible/files.
@@ -238,8 +253,10 @@ SSH into the control node and follow the steps below:
    -Run the playbook using this command ansible-playbook metricbeat-playbook.yml 
     and navigate to Kibana > Logs : Add Metric data > Docker Metrics (DEB) > 5:Module Status > Check data_on Kibana to check that the installation worked as expected.
    
-   [Metricbeat Module Kibana Dashboard]()
-   
+   [Metricbeat Metrics for Web-1 Server](https://github.com/cskelk789/Automated-ELK-Stack-Deployment/blob/main/Images/Kibana%20Beats%20Related/Web-1%20Metrics%20on%20Metricbeat.png)
+    [Metricbeat Metrics for Web-2 Server](https://github.com/cskelk789/Automated-ELK-Stack-Deployment/blob/main/Images/Kibana%20Beats%20Related/Web-2%20Metrics%20on%20Metricbeat.png)
+    [Metricbeat Metrics for Web-3 Server](https://github.com/cskelk789/Automated-ELK-Stack-Deployment/blob/main/Images/Kibana%20Beats%20Related/Web-3%20Metrics%20on%20Metricbeat.png)  
+    
 Answer the following questions to fill in the blanks:
 - Which file is the playbook? Where do you copy it?
   * For Elk, it is [My First Playbook](https://github.com/cskelk789/Automated-ELK-Stack-Deployment/blob/main/Ansible/ELK/install-elk.yml)
@@ -257,6 +274,7 @@ Answer the following questions to fill in the blanks:
 
 - Which URL do you navigate to in order to check that the ELK server is running?
   * http://40.86.202.243:5601//app/kibana
+  * [Kibana Homepage](https://github.com/cskelk789/Automated-ELK-Stack-Deployment/blob/main/Images/Kibana%20Beats%20Related/Kibana%20Homepage.png)
 
 As a **Bonus**, provide the specific commands the user will need to run to download the playbook, update the files, etc.
   * The specific commands the user will need to run in order to download the playbook and configuration files, update the files, etc:
