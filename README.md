@@ -60,16 +60,13 @@ The configuration details of each machine may be found below.
 The machines on the internal network are not exposed to the public Internet. A peering relationship has been established between the Red Team Virtual Network and the ELK Virtual Network to facilitate communication.
 
 Only the __Jump-Box-Provisioner__ machine can accept connections from the Internet. Access to this machine is only allowed from the following IP addresses:
-
 - **Workstation MY Public IP through TCP 5601**
-
-Machines within the network can only be accessed by __Workstation and Jump-Box-Provisioner through SSH JumpBox__.
+- **Machines within the network can only be accessed by-**
+    - __Workstation and Jump-Box-Provisioner through SSH JumpBox__.
 - Which machine did you allow to access your ELK VM?
   - *Jump-Box-Provisioner is allowed to access the ELK VM.*
-
 - What was its IP address?
-  - *The Jump-Box-Provisioner IP is at 10.0.0.4(Private IP) and 20.124.251.206(Public IP) and it can be accessed via SSH port 22. The ELK VM could be accessed by Workstation MY Public IP via port TCP 5601.*
-
+  - *The Jump-Box-Provisioner IP is at 10.0.0.4(Private IP) and 20.124.251.206(Public IP) and it can be accessed via SSH port 22. The ELK VM could be accessed by Workstation MY      Public IP via port TCP 5601.*
 
 A summary of the access policies in place can be found in the table below.
 
@@ -255,21 +252,34 @@ Answer the following questions to fill in the blanks:
   How do I specify which machine to install the ELK server on versus which to install Filebeat on?
   * /etc/ansible/hosts file (IP of the Virtual Machines).
   * Two separate groups have been specified in the etc/ansible/hosts file:
-    * Group 1-webservers which has the IPs of the 3 VMs, Filebeat will be installed on these 3 VM's. 
-    * Group 2-ELKserver which will have the IP of the VM ELK is installed on.
+    * Group 1-webservers-the IPs of the 3 VM's-Web-1, Web-2, Web-3. Filebeat will be installed on these 3 VM's. 
+    * Group 2-ELKserver-the IP of the VM, ELK is installed on.
 
 - Which URL do you navigate to in order to check that the ELK server is running?
-  * http://20.84.136.248:5601//app/kibana
+  * http://40.86.202.243:5601//app/kibana
 
 As a **Bonus**, provide the specific commands the user will need to run to download the playbook, update the files, etc.
   * The specific commands the user will need to run in order to download the playbook and configuration files, update the files, etc:
     | Command                                                        | Purpose                                                     | 
-    | -------------------------------------------------------------- |:-----------------------------------------------------------:|
-    | ssh-keygen                                                     |create a ssh key for setup VM's                             |
-    |sudo cat .ssh/id_rsa.pub	                                       |to view the ssh public key                                  |
+    |:--------------------------------------------------------------:|:-----------------------------------------------------------:|
+    |ssh-keygen                                                      |create a ssh key for setup VM's                              |
+    |sudo cat .ssh/id_rsa.pub	                                       |to view the ssh public key                                   |
     |ssh azadmin@Jump-Box-Provisioner IP address	                    |to log into the Jump-Box-Provisioner                         |
     |sudo docker container list -a	                                  |list all docker containers                                   |
-    |sudo docker start dremy_elbakyan	                               |start docker container dremy_elbakyan                        |
+    |sudo docker start <name of my container>	                       |start docker container dremy_elbakyan                        |
     |sudo docker ps -a	                                              |list all active/inactive containers                          |
-    |sudo docker attach dremy_elbakyan	                              |effectively sshing into the dremy_elbakyan container         |
+    |sudo docker attach <name of my container>                       |effectively sshing into the dremy_elbakyan container         |
     |cd /etc/ansible	                                                |Change directory to the Ansible directory                    |
+    |nano /etc/ansible/hosts	                                        |to edit the hosts file
+    |nano /etc/ansible/ansible.cfg	                                  |to edit the ansible.cfg file
+    |nano /etc/ansible/pentest.yml	                                  |to edit the My-Playbook
+    |ansible-playbook [location][filename]	                          |to run the playbook
+    |sudo apt-get update	                                            |this will update all packages
+    |sudo apt install docker.io	                                     |install docker application
+    |sudo service docker start	                                      |start the docker application
+    |sudo systemctl status docker	                                   |status of the docker application
+    |sudo systemctl start docker	                                    |start the docker service
+    |nano filebeat-config.yml	                                       |create and edit filebeat config file
+    |nano filebeat-playbook.yml	                                     |write YAML file to install filebeat on webservers
+    |nano metricbeat-config.yml	                                     |create metricbeat config file and edit it
+    |nano metricbeat-playbook.yml	                                   |write YAML file to install metricbeat on webservers
