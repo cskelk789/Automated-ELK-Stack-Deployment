@@ -26,9 +26,8 @@ This document contains the following details:
 
 ### Description of the Topology
 
-The main purpose of this network is to expose a load-balanced and monitored instance of DVWA, the D*mn Vulnerable Web Application.
+The main purpose of this network is to expose a load-balanced and monitored instance of DVWA, the D*mn Vulnerable Web Application.Load balancing ensures that the application will be highly **functional and available**, in addition to restricting **traffic** to the network.
 
-Load balancing ensures that the application will be highly **functional and available**, in addition to restricting **traffic** to the network.
 - What aspect of security do load balancers protect? 
 
   **Load Balancers play an important security role as computing moves evermore to the cloud. The off-loading function of a load balancer defends an organization against distributed denial-of-service (DDoS) attacks. It does this by shifting attack traffic from the corporate server to a public cloud provider. Hence, Load balancers add resiliency to the network.**
@@ -40,7 +39,7 @@ Load balancing ensures that the application will be highly **functional and avai
 Integrating an ELK server allows users to easily monitor the vulnerable VMs for changes to the **network** and system **logs**.
 - What does Filebeat watch for?
 
-  **Filebeat is a light weight log shipper which is installed as an agent on your servers and monitors the log files or locations that you specify, collects log events, and forwards them either to Elasticsearch or log stash for indexing.**
+  **Filebeat is a light weight log shipper which is installed as an agent on the servers and monitors the log files or locations that you specify, collects log events, and forwards them either to Elasticsearch or log stash for indexing.**
 
 - What does Metricbeat record?
 
@@ -55,9 +54,17 @@ The configuration details of each machine may be found below.
 | Web-3      | Ubuntu Server | 10.0.0.8   | Linux            |
 | ELK Server | Ubuntu Server | 10.1.0.4   | Linux            |
 
+In this project, the Load Balancer, RedTeamLB, helps in maintaining fault tolerance and redundancy in the network. As websites receive more traffic, more servers 
+can be added to the group (“pool”) of servers that the load balancer has access to. This helps distribute traffic evenly across the servers and mitigates DoS(Denial of Service) attacks. We also have a health probe configured on the Load Balancer, this probe regularly check all the machines behind the load balancer. Machines with issues are reported, and the load balancer stops sending traffic to those machines.
+
+[Red Team Backend Pool](https://github.com/cskelk789/Automated-ELK-Stack-Deployment/blob/main/Images/ELK%20Configurations/Red%20Team%20Backend%20Pool.png)
+
 ### Access Policies
 
-The machines on the internal network are not exposed to the public Internet. A peering relationship has been established between the Red Team Virtual Network and the ELK Virtual Network to facilitate communication.
+The machines on the internal network are not exposed to the public Internet. SSH keys have been used for authentication to eliminate vulnerability to password-based brute-force.
+A peering relationship has been established between the Red Team Virtual Network and the ELK Virtual Network to facilitate communication.
+[ELK to Red Team Peering](https://github.com/cskelk789/Automated-ELK-Stack-Deployment/blob/main/Images/ELK%20Configurations/Elk%20to%20Red%20Team%20Peering.png)
+[Red Team to ELK Peering](https://github.com/cskelk789/Automated-ELK-Stack-Deployment/blob/main/Images/ELK%20Configurations/Red%20to%20Elk%20Team%20Peering.png)
 
 Only the __Jump-Box-Provisioner__ machine can accept connections from the Internet. Access to this machine is only allowed from the following IP addresses:
 - **Workstation MY Public IP through TCP 5601**
@@ -173,13 +180,13 @@ The following screenshot displays the result of running `docker container list -
 ### Web-3
 ![Web-3](https://github.com/cskelk789/Automated-ELK-Stack-Deployment/blob/main/Images/Docker%20Status/Web-3%20PS.png)
 
-[ELK VM Docker Container List](https://github.com/cskelk789/ELK-Stack-Deployment/blob/main/Ansible/ansible.cfg)
-
 ### Machines being Monitored
 This ELK server is configured to monitor the following machines:
   - Web-1: 10.1.0.5
   - Web-2: 10.1.0.7
   - Web-3: 10.1.0.8
+  
+  Though the ELK configuration supports 8 data collection Tools called Beats, this project uses only 2 of them-Filebeat and Metricbeat. The next section explains more on the beats used.
 
 ### Beats in Use
 We have installed the following Beats on these machines:
@@ -189,7 +196,7 @@ We have installed the following Beats on these machines:
 [View status of Metricbeat Module](https://github.com/cskelk789/Automated-ELK-Stack-Deployment/blob/main/Images/Kibana%20Beats%20Related/Metricbeat_module_Status.png)
 
 These Beats allow us to collect the following information from each machine:
-- Filebeat is used to collect log files from very specific files from remote machines. For example logs from Apache, Microsft Azure tools, web servers and MySQL databases.
+- Filebeat is used to collect log files from very specific files from remote machines. For example logs from Apache, Microsft Azure tools, the Nginx web servers and MySQL databases.
 - Metericbeat is used to monitor VM stats, per CPU core stats, per filesystem stats, memory stats and network stats.
 
 ### How to use the Ansible Build?
@@ -200,15 +207,16 @@ SSH into the control node and follow the steps below:
 - Update the **config** file to include the **remote users, ports and any IP.**
 - Run the playbook, and navigate to Kibana ((My Workstation IP Address):5601) to check that the installation worked as expected.
 
-- Configuring and Running the Elk VM Playbook:
-   - Run the playbook using this command : 
-     ```ansible-playbook /etc/ansible/install-elk.yml```
+
+#### Configuring and Running the Elk VM Playbook:
+   - Run the playbook using this command : ```ansible-playbook /etc/ansible/install-elk.yml```
      
-- Configuring and Running the Filebeat Playbook:
+#### Configuring and Running the Filebeat Playbook:
   Since Filebeat is built to collect data about specific files on remote machines, it must be installed on the VMs we  want to monitor.
-   -Copy the filebeat-config.yml file to /etc/ansible/files.
-   -Update the filebeat-config.yml file to include the ELK private IP in lines 1106 and 1806 as shown below:
-    ```
+   - Copy the filebeat-config.yml file to /etc/ansible/files.
+   - Update the filebeat-config.yml file to include the ELK private IP in lines 1106 and 1806 as shown below:
+   
+   ```
     output.elasticsearch:
   # Boolean flag to enable or disable the output module.
   #enabled: true
@@ -227,15 +235,14 @@ SSH into the control node and follow the steps below:
   host: "10.1.0.4:5601" 
   ```
 
-   -Run the playbook using this command - `ansible-playbook filebeat-playbook.yml` 
-    and navigate to Kibana > Logs : Add log data > System logs (DEB) > 5:Module Status > 
+   - Run the playbook using this command - `ansible-playbook filebeat-playbook.yml` and navigate to Kibana > Logs : Add log data > System logs (DEB) > 5:Module Status > 
     Check Incoming data on Kibana to check that the installation worked as expected.
   
     [Filebeat Module Kibana Dashboard](https://github.com/cskelk789/Automated-ELK-Stack-Deployment/blob/main/Images/Kibana%20Beats%20Related/Filebeat%20Syslogs%20Dashboard.png)
    
-- Configuring and Running the Metricbeat Playbook:
-   -Copy the metricbeat-config.yml file to /etc/ansible/files.
-   -Update the metricbeat-config.yml file to include the ELK private IP in lines 62 and 96 as shown below:
+#### Configuring and Running the Metricbeat Playbook:
+   - Copy the metricbeat-config.yml file to /etc/ansible/files.
+   - Update the metricbeat-config.yml file to include the ELK private IP in lines 62 and 96 as shown below:
    
    ```
    #============================== Kibana =====================================
@@ -249,13 +256,13 @@ SSH into the control node and follow the steps below:
   username: "elastic"
   password: "changeme"
   ```
+    
+   - Run the playbook using this command ansible-playbook metricbeat-playbook.yml and navigate to Kibana > Logs : Add Metric data > Docker Metrics (DEB) > 5:Module Status > Check data_on Kibana to check that the installation worked as expected.
    
-   -Run the playbook using this command ansible-playbook metricbeat-playbook.yml 
-    and navigate to Kibana > Logs : Add Metric data > Docker Metrics (DEB) > 5:Module Status > Check data_on Kibana to check that the installation worked as expected.
-   
-   [Metricbeat Metrics for Web-1 Server](https://github.com/cskelk789/Automated-ELK-Stack-Deployment/blob/main/Images/Kibana%20Beats%20Related/Web-1%20Metrics%20on%20Metricbeat.png)
-    [Metricbeat Metrics for Web-2 Server](https://github.com/cskelk789/Automated-ELK-Stack-Deployment/blob/main/Images/Kibana%20Beats%20Related/Web-2%20Metrics%20on%20Metricbeat.png)
-    [Metricbeat Metrics for Web-3 Server](https://github.com/cskelk789/Automated-ELK-Stack-Deployment/blob/main/Images/Kibana%20Beats%20Related/Web-3%20Metrics%20on%20Metricbeat.png)  
+   - [Metricbeat Module Kibana Dashboard]()
+   - [Metricbeat Metrics for Web-1 Server](https://github.com/cskelk789/Automated-ELK-Stack-Deployment/blob/main/Images/Kibana%20Beats%20Related/Web-1%20Metrics%20on%20Metricbeat.png)
+   - [Metricbeat Metrics for Web-2 Server](https://github.com/cskelk789/Automated-ELK-Stack-Deployment/blob/main/Images/Kibana%20Beats%20Related/Web-2%20Metrics%20on%20Metricbeat.png)
+   - [Metricbeat Metrics for Web-3 Server](https://github.com/cskelk789/Automated-ELK-Stack-Deployment/blob/main/Images/Kibana%20Beats%20Related/Web-3%20Metrics%20on%20Metricbeat.png)  
     
 Answer the following questions to fill in the blanks:
 - Which file is the playbook? Where do you copy it?
@@ -273,8 +280,8 @@ Answer the following questions to fill in the blanks:
     * Group 2-ELKserver-the IP of the VM, ELK is installed on.
 
 - Which URL do you navigate to in order to check that the ELK server is running?
-  * http://40.86.202.243:5601//app/kibana
-  * [Kibana Homepage](https://github.com/cskelk789/Automated-ELK-Stack-Deployment/blob/main/Images/Kibana%20Beats%20Related/Kibana%20Homepage.png)
+  * http://40.86.202.243:5601/app/kibana
+  * [This is the Kibana Homepage](https://github.com/cskelk789/Automated-ELK-Stack-Deployment/blob/main/Images/Kibana%20Beats%20Related/Kibana%20Homepage.png)
 
 As a **Bonus**, provide the specific commands the user will need to run to download the playbook, update the files, etc.
   * The specific commands the user will need to run in order to download the playbook and configuration files, update the files, etc:
