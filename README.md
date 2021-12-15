@@ -4,7 +4,7 @@ The files in this repository were used to configure the network depicted below.
 
 ![ELK Server Implementation](https://user-images.githubusercontent.com/95726896/145699262-aac163ea-039e-48d3-bb53-b352aaa48a03.png)
 
-These files have been tested and used to generate a live ELK deployment on Azure. They can be used to either recreate the entire deployment pictured above. Alternatively, select portions of the **yml and config** file may be used to install only certain pieces of it, such as Filebeat.
+These files have been tested and used to generate a live ELK deployment on Azure. They can be used to either recreate the entire deployment pictured above. Alternatively, select portions of the **yml and config** file may be used to install only certain pieces of it, such as Filebeat. More files have been created in the appropriate containers to automate deployment.
 
 * [DVWA Web VM/Docker Configuration](https://github.com/cskelk789/ELK-Stack-Deployment/blob/main/Ansible/DVWA/pentest.yml)
 * [Hosts File](https://github.com/cskelk789/ELK-Stack-Deployment/blob/main/Ansible/hosts)
@@ -27,6 +27,8 @@ This document contains the following details:
 ### Description of the Topology
 
 The main purpose of this network is to expose a load-balanced and monitored instance of DVWA, the D*mn Vulnerable Web Application.Load balancing ensures that the application will be highly **functional and available**, in addition to restricting **traffic** to the network.
+Below is a screenshot of the DVWA Application:
+![Screenshot of DVWA Web Application](https://github.com/cskelk789/Automated-ELK-Stack-Deployment/blob/main/Images/DVWA%20Web%20App%20Home%20page.png)
 
 - What aspect of security do load balancers protect? 
 
@@ -56,15 +58,15 @@ The configuration details of each machine may be found below.
 
 In this project, the Load Balancer, RedTeamLB, helps in maintaining fault tolerance and redundancy in the network. As websites receive more traffic, more servers 
 can be added to the group (“pool”) of servers that the load balancer has access to. This helps distribute traffic evenly across the servers and mitigates DoS(Denial of Service) attacks. We also have a health probe configured on the Load Balancer, this probe regularly check all the machines behind the load balancer. Machines with issues are reported, and the load balancer stops sending traffic to those machines.
-
-[Red Team Backend Pool](https://github.com/cskelk789/Automated-ELK-Stack-Deployment/blob/main/Images/ELK%20Configurations/Red%20Team%20Backend%20Pool.png)
+- Screenshot of the Red Team Backend Pool:
+![Red Team Backend Pool](https://github.com/cskelk789/Automated-ELK-Stack-Deployment/blob/main/Images/ELK%20Configurations/Red%20Team%20Backend%20Pool.png)
 
 ### Access Policies
 
 The machines on the internal network are not exposed to the public Internet. SSH keys have been used for authentication to eliminate vulnerability to password-based brute-force.
 A peering relationship has been established between the Red Team Virtual Network and the ELK Virtual Network to facilitate communication.
-[ELK to Red Team Peering](https://github.com/cskelk789/Automated-ELK-Stack-Deployment/blob/main/Images/ELK%20Configurations/Elk%20to%20Red%20Team%20Peering.png)
-[Red Team to ELK Peering](https://github.com/cskelk789/Automated-ELK-Stack-Deployment/blob/main/Images/ELK%20Configurations/Red%20to%20Elk%20Team%20Peering.png)
+- [Screenshot-ELK to Red Team Peering](https://github.com/cskelk789/Automated-ELK-Stack-Deployment/blob/main/Images/ELK%20Configurations/Elk%20to%20Red%20Team%20Peering.png)
+- [Screenshot-Red Team to ELK Peering](https://github.com/cskelk789/Automated-ELK-Stack-Deployment/blob/main/Images/ELK%20Configurations/Red%20to%20Elk%20Team%20Peering.png)
 
 Only the __Jump-Box-Provisioner__ machine can accept connections from the Internet. Access to this machine is only allowed from the following IP addresses:
 - **Workstation MY Public IP through TCP 5601**
@@ -103,7 +105,7 @@ The ELK Installation playbook implements the following tasks:
      become: true
      tasks:
     ```
-- Install Docker.io
+- Install Docker.io - It references the IP address listed under [elk] in ansible's hosts file to install docker on the target VM.
   ```
   - name: docker.io
     apt:
@@ -127,7 +129,7 @@ The ELK Installation playbook implements the following tasks:
       name: docker
       state: present
   ```
-- Increase Virtual Memory
+- Increase Virtual Memory-A standard container does not have enough virtual memory to run an ELK container. For 3 DVWA machines, the suggested amount is 262144.
   ```
   - name: Increase virtual memory
     command: sysctl -w vm.max_map_count=262144
@@ -186,6 +188,9 @@ This ELK server is configured to monitor the following machines:
   - Web-2: 10.1.0.7
   - Web-3: 10.1.0.8
   
+- When a ping command is run from the JumpBox-Provisioner, all the other 4 Vm's respond, 
+![Below is a screenshot of ping from JumpBox](https://github.com/cskelk789/Automated-ELK-Stack-Deployment/blob/main/Images/ansible%20Ping%20on%20JumpBox.png)
+  
   Though the ELK configuration supports 8 data collection Tools called Beats, this project uses only 2 of them-Filebeat and Metricbeat. The next section explains more on the beats used.
 
 ### Beats in Use
@@ -238,7 +243,7 @@ SSH into the control node and follow the steps below:
    - Run the playbook using this command - `ansible-playbook filebeat-playbook.yml` and navigate to Kibana > Logs : Add log data > System logs (DEB) > 5:Module Status > 
     Check Incoming data on Kibana to check that the installation worked as expected.
   
-    [Filebeat Module Kibana Dashboard](https://github.com/cskelk789/Automated-ELK-Stack-Deployment/blob/main/Images/Kibana%20Beats%20Related/Filebeat%20Syslogs%20Dashboard.png)
+    [Filebeat Kibana Dashboard](https://github.com/cskelk789/Automated-ELK-Stack-Deployment/blob/main/Images/Kibana%20Beats%20Related/Filebeat%20Syslogs%20Dashboard.png)
    
 #### Configuring and Running the Metricbeat Playbook:
    - Copy the metricbeat-config.yml file to /etc/ansible/files.
@@ -280,8 +285,8 @@ Answer the following questions to fill in the blanks:
     * Group 2-ELKserver-the IP of the VM, ELK is installed on.
 
 - Which URL do you navigate to in order to check that the ELK server is running?
-  * http://40.86.202.243:5601/app/kibana
-  * [This is the Kibana Homepage](https://github.com/cskelk789/Automated-ELK-Stack-Deployment/blob/main/Images/Kibana%20Beats%20Related/Kibana%20Homepage.png)
+  * [ELK Server URL](http://40.86.202.243:5601/app/kibana)
+  * ![This is the Kibana Homepage](https://github.com/cskelk789/Automated-ELK-Stack-Deployment/blob/main/Images/Kibana%20Beats%20Related/Kibana%20Homepage.png)
 
 As a **Bonus**, provide the specific commands the user will need to run to download the playbook, update the files, etc.
   * The specific commands the user will need to run in order to download the playbook and configuration files, update the files, etc:
