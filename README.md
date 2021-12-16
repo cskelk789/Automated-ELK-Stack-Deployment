@@ -272,6 +272,10 @@ SSH into the control node and follow the steps below:
    - [Metricbeat Metrics for Web-2 Server](https://github.com/cskelk789/Automated-ELK-Stack-Deployment/blob/main/Images/Kibana%20Beats%20Related/Web-2%20Metrics%20on%20Metricbeat.png)
    - [Metricbeat Metrics for Web-3 Server](https://github.com/cskelk789/Automated-ELK-Stack-Deployment/blob/main/Images/Kibana%20Beats%20Related/Web-3%20Metrics%20on%20Metricbeat.png)  
     
+    Metricbeat does much more than simply collect metrics as it can be used to tap into a variety of systems and execute a range of enhancements to the log file before shipping the metrics to ELK. In this project as seen in the dashboards above, Metricbeat collects data from the 3 webservers and give a dashboard showing various web server characteristics. We can see the traffic on the webservers.
+
+The shipper when paired with Kibana can be used to report on CPU, memory and load metrics. When used in a containerised environment with Docker it can be used as a solution for container monitoring on the Logit.io platform.
+    
 Answer the following questions to fill in the blanks:
 - Which file is the playbook? Where do you copy it?
   * For Elk, it is [My First Playbook](https://github.com/cskelk789/Automated-ELK-Stack-Deployment/blob/main/Ansible/ELK/install-elk.yml)
@@ -296,28 +300,28 @@ Answer the following questions to fill in the blanks:
   
   * ![This is the Kibana Homepage](https://github.com/cskelk789/Automated-ELK-Stack-Deployment/blob/main/Images/Kibana%20Beats%20Related/Kibana%20Homepage.png)
 
-As a **Bonus**, provide the specific commands the user will need to run to download the playbook, update the files, etc.
+- As a **Bonus**, provide the specific commands the user will need to run to download the playbook, update the files, etc.
   * The specific commands the user will need to run in order to download the playbook and configuration files, update the files, etc:
     | Command                                                        | Purpose                                                     | 
     |:--------------------------------------------------------------:|:-----------------------------------------------------------:|
-    |ssh-keygen                                                      |create a ssh key for setup VM's                              |
-    |sudo cat .ssh/id_rsa.pub	                                       |to view the ssh public key                                   |
-    |ssh azadmin@Jump-Box-Provisioner IP address	                    |to log into the Jump-Box-Provisioner                         |
-    |sudo docker container list -a	                                  |list all docker containers                                   |
-    |sudo docker start <name of my container>	                       |start docker container dremy_elbakyan                        |
-    |sudo docker ps -a	                                              |list all active/inactive containers                          |
-    |sudo docker attach <name of my container>                       |effectively sshing into the dremy_elbakyan container         |
-    |cd /etc/ansible	                                                |Change directory to the Ansible directory                    |
-    |nano /etc/ansible/hosts	                                        |to edit the hosts file
-    |nano /etc/ansible/ansible.cfg	                                  |to edit the ansible.cfg file
-    |nano /etc/ansible/pentest.yml	                                  |to edit the My-Playbook
-    |ansible-playbook [location][filename]	                          |to run the playbook
-    |sudo apt-get update	                                            |this will update all packages
-    |sudo apt install docker.io	                                     |install docker application
-    |sudo service docker start	                                      |start the docker application
-    |sudo systemctl status docker	                                   |status of the docker application
-    |sudo systemctl start docker	                                    |start the docker service
-    |nano filebeat-config.yml	                                       |create and edit filebeat config file
-    |nano filebeat-playbook.yml	                                     |write YAML file to install filebeat on webservers
-    |nano metricbeat-config.yml	                                     |create metricbeat config file and edit it
-    |nano metricbeat-playbook.yml	                                   |write YAML file to install metricbeat on webservers
+    |ssh-keygen                                                      |:create a ssh key for setup VM's                              |
+    |sudo cat .ssh/id_rsa.pub	                                       |:to view the ssh public key                                   |
+    |ssh azadmin@Jump-Box-Provisioner IP address	                    |:to log into the Jump-Box-Provisioner                         |
+    |sudo docker container list -a	                                  |:list all docker containers                                   |
+    |sudo docker start <name of my container>	                       |:start docker container dremy_elbakyan                        |
+    |sudo docker ps -a	                                              |:list all active/inactive containers                          |
+    |sudo docker attach <name of my container>                       |:effectively sshing into the dremy_elbakyan container         |
+    |cd /etc/ansible	                                                |:Change directory to the Ansible directory                    |
+    |nano /etc/ansible/hosts	                                        |:to edit the hosts file
+    |nano /etc/ansible/ansible.cfg	                                  |:to edit the ansible.cfg file
+    |nano /etc/ansible/pentest.yml	                                  |:to edit the My-Playbook
+    |ansible-playbook [location][filename]	                          |:to run the playbook
+    |sudo apt-get update	                                            |:this will update all packages
+    |sudo apt install docker.io	                                     |:install docker application
+    |sudo service docker start	                                      |:start the docker application
+    |sudo systemctl status docker	                                   |:status of the docker application
+    |sudo systemctl start docker	                                    |:start the docker service
+    |nano filebeat-config.yml	                                       |:create and edit filebeat config file
+    |nano filebeat-playbook.yml	                                     |:write YAML file to install filebeat on webservers
+    |nano metricbeat-config.yml	                                     |:create metricbeat config file and edit it
+    |nano metricbeat-playbook.yml	                                   |:write YAML file to install metricbeat on webservers
