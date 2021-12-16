@@ -52,6 +52,14 @@ The configuration details of each machine may be found below.
 | Web-3      | Ubuntu Server | 10.0.0.8   | Linux            |
 | ELK Server | Ubuntu Server | 10.1.0.4   | Linux            |
 
+
+- Below is a Screenshot of a listing of virtual machines in the project (Taken from the Azure portal):
+![Vm's](https://github.com/cskelk789/Automated-ELK-Stack-Deployment/blob/main/Images/Virtual%20Machines%20on%20Azure.png)
+
+-Below is a screenshot of the virtual networks in the project (Taken from the Azure portal):
+![Virtual Networks](https://github.com/cskelk789/Automated-ELK-Stack-Deployment/blob/main/Images/Virtual%20Networks%20on%20Azure.png)
+
+
 In this project, the Load Balancer, RedTeamLB, helps in maintaining fault tolerance and redundancy in the network. As websites receive more traffic, more servers 
 can be added to the group (“pool”) of servers that the load balancer has access to. This helps distribute traffic evenly across the servers and mitigates DoS(Denial of Service) attacks. We also have a health probe configured on the Load Balancer, this probe regularly check all the machines behind the load balancer. Machines with issues are reported, and the load balancer stops sending traffic to those machines.
 - Screenshot of the Red Team Backend Pool:
