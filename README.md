@@ -272,11 +272,11 @@ SSH into the control node and follow the steps below:
    - [Metricbeat Metrics for Web-2 Server](https://github.com/cskelk789/Automated-ELK-Stack-Deployment/blob/main/Images/Kibana%20Beats%20Related/Web-2%20Metrics%20on%20Metricbeat.png)
    - [Metricbeat Metrics for Web-3 Server](https://github.com/cskelk789/Automated-ELK-Stack-Deployment/blob/main/Images/Kibana%20Beats%20Related/Web-3%20Metrics%20on%20Metricbeat.png)  
     
-    Metricbeat does much more than simply collect metrics as it can be used to tap into a variety of systems and execute a range of enhancements to the log file 
-    before shipping the metrics to ELK. In this project as seen in the dashboards above, Metricbeat collects data from the 3 webservers and give a dashboard 
-    showing various web server characteristics. We can see the traffic on the webservers.
-    The shipper when paired with Kibana can be used to report on CPU, memory and load metrics. When used in a containerised environment with Docker it can be used 
-    as a solution for container monitoring.
+    Metricbeat does much more than simply collect metrics as it can be used to tap into a variety of systems and execute a range of enhancements 
+    to the log file     before shipping the metrics to ELK. In this project as seen in the dashboards above, Metricbeat collects data from the 
+    3 webservers and give a dashboard showing various web server characteristics. We can see the traffic on the webservers.
+    The shipper when paired with Kibana can be used to report on CPU, memory and load metrics. When used in a containerised environment with Docker 
+    it can be used as a solution for container monitoring.
     
 Answer the following questions to fill in the blanks:
 - Which file is the playbook? Where do you copy it?
