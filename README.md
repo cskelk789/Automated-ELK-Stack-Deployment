@@ -267,8 +267,8 @@ SSH into the control node and follow the steps below:
 Answer the following questions to fill in the blanks:
 - Which file is the playbook? Where do you copy it?
   * For Elk, it is [My First Playbook](https://github.com/cskelk789/Automated-ELK-Stack-Deployment/blob/main/Ansible/ELK/install-elk.yml)
-   For Filebeat, it is [Filebeat Playbook](https://github.com/cskelk789/Automated-ELK-Stack-Deployment/blob/main/Ansible/Filebeat/filebeat-playbook.yml)
-   For Metricbeat, it is [Metricbeat Playbook](https://github.com/cskelk789/Automated-ELK-Stack-Deployment/blob/main/Ansible/Metricbeat/metricbeat-playbook.yml)
+  * For Filebeat, it is [Filebeat Playbook](https://github.com/cskelk789/Automated-ELK-Stack-Deployment/blob/main/Ansible/Filebeat/filebeat-playbook.yml)
+  * For Metricbeat, it is [Metricbeat Playbook](https://github.com/cskelk789/Automated-ELK-Stack-Deployment/blob/main/Ansible/Metricbeat/metricbeat-playbook.yml)
    
    * The files are copied to /etc/ansible/
    
