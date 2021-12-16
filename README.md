@@ -28,24 +28,20 @@ This document contains the following details:
 
 The main purpose of this network is to expose a load-balanced and monitored instance of DVWA, the D*mn Vulnerable Web Application.Load balancing ensures that the application will be highly **functional and available**, in addition to restricting **traffic** to the network.
 Below is a screenshot of the DVWA Application:
+
 ![Screenshot of DVWA Web Application](https://github.com/cskelk789/Automated-ELK-Stack-Deployment/blob/main/Images/DVWA%20Web%20App%20Home%20page.png)
 
 - What aspect of security do load balancers protect? 
-
   **Load Balancers play an important security role as computing moves evermore to the cloud. The off-loading function of a load balancer defends an organization against distributed denial-of-service (DDoS) attacks. It does this by shifting attack traffic from the corporate server to a public cloud provider. Hence, Load balancers add resiliency to the network.**
 
 - What is the advantage of a jump box?
-
   **A Jump Box Provisioner is a good addition to a corporate network as it prevents internal VMs from being exposed via a public IP Address. This allows monitoring and logging on a single box. By implementing Security Rules, we can also restrict the IP addresses able to communicate with the Jump Box.**
 
-Integrating an ELK server allows users to easily monitor the vulnerable VMs for changes to the **network** and system **logs**.
 - What does Filebeat watch for?
-
   **Filebeat is a light weight log shipper which is installed as an agent on the servers and monitors the log files or locations that you specify, collects log events, and forwards them either to Elasticsearch or log stash for indexing.**
 
 - What does Metricbeat record?
-
-  **Metricbeat is a lightweight agent that can be installed on target servers to periodically collect metric data from your target servers, this could be operating system metrics such as CPU or memory or data related to services running on the server. It can also be used to monitor other beats and ELK stack itself.**
+  **Metricbeat is a lightweight agent that can be installed on target servers to periodically collect metric data from your target servers, this could be operating system      metrics such as CPU or memory or data related to services running on the server. It can also be used to monitor other beats and ELK stack itself.**
 
 The configuration details of each machine may be found below.
 | Name       | Function      | IP Address | Operating System |
@@ -63,7 +59,7 @@ can be added to the group (“pool”) of servers that the load balancer has acc
 
 ### Access Policies
 
-The machines on the internal network are not exposed to the public Internet. SSH keys have been used for authentication to eliminate vulnerability to password-based brute-force.
+Integrating an ELK server allows users to easily monitor the vulnerable VMs for changes to the **network** and system **logs**.The machines on the internal network are not exposed to the public Internet. SSH keys have been used for authentication to eliminate vulnerability to password-based brute-force.
 A peering relationship has been established between the Red Team Virtual Network and the ELK Virtual Network to facilitate communication.
 - [Screenshot-ELK to Red Team Peering](https://github.com/cskelk789/Automated-ELK-Stack-Deployment/blob/main/Images/ELK%20Configurations/Elk%20to%20Red%20Team%20Peering.png)
 - [Screenshot-Red Team to ELK Peering](https://github.com/cskelk789/Automated-ELK-Stack-Deployment/blob/main/Images/ELK%20Configurations/Red%20to%20Elk%20Team%20Peering.png)
@@ -191,11 +187,10 @@ This ELK server is configured to monitor the following machines:
 - When a ping command is run from the JumpBox-Provisioner, all the other 4 Vm's respond, 
 ![Below is a screenshot of ping from JumpBox](https://github.com/cskelk789/Automated-ELK-Stack-Deployment/blob/main/Images/ansible%20Ping%20on%20JumpBox.png)
   
-  Though the ELK configuration supports 8 data collection Tools called Beats, this project uses only 2 of them-Filebeat and Metricbeat. The next section explains more on the beats used.
-
+ 
 ### Beats in Use
-We have installed the following Beats on these machines:
-- Filebeat - 
+ Though the ELK configuration supports 8 data collection Tools called Beats, this project uses only 2 of them-Filebeat and Metricbeat. Thed following 2 beats have been installed on these machines:
+- Filebeat 
 [View status of Filebeat Module](https://github.com/cskelk789/Automated-ELK-Stack-Deployment/blob/main/Images/Kibana%20Beats%20Related/Filebeat_module_Status.png)
 - Metricbeat
 [View status of Metricbeat Module](https://github.com/cskelk789/Automated-ELK-Stack-Deployment/blob/main/Images/Kibana%20Beats%20Related/Metricbeat_module_Status.png)
@@ -285,7 +280,12 @@ Answer the following questions to fill in the blanks:
     * Group 2-ELKserver-the IP of the VM, ELK is installed on.
 
 - Which URL do you navigate to in order to check that the ELK server is running?
+  The below URL is used to navigate to the ELK server:
+  
   * [ELK Server URL](http://40.86.202.243:5601/app/kibana)
+  
+  Below is a screenshot of the Kibana Homepage: 
+  
   * ![This is the Kibana Homepage](https://github.com/cskelk789/Automated-ELK-Stack-Deployment/blob/main/Images/Kibana%20Beats%20Related/Kibana%20Homepage.png)
 
 As a **Bonus**, provide the specific commands the user will need to run to download the playbook, update the files, etc.
